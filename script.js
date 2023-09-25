@@ -1,12 +1,16 @@
 const display = document.getElementById("display");
 const numberButtons = document.querySelectorAll(".number");
 numberButtons.forEach((button) => button.addEventListener("click", inputToDisplay));
+const operatorButtons = document.querySelectorAll(".operator");
+operatorButtons.forEach((button) => button.addEventListener("click", setOperator));
 const clearButton = document.getElementById("clear");
 clearButton.addEventListener("click", reset);
+const equalsButton = document.getElementById("equals");
+equalsButton.addEventListener("click", operate);
 
 let firstNumber = 0;
 let secondNumber = 0;
-let operator;
+let operator = null;
 let textDisplay = "0";
 
 function add(num1, num2) {
@@ -25,17 +29,33 @@ function divide(num1, num2) {
     return num1 / num2;
 }
 
-function operate(num1, num2, op) {
-    switch(op) {
+function operate() {
+    console.log(firstNumber);
+    console.log(operator);
+    console.log(secondNumber);
+    switch(operator) {
         case "add":
-            return add(num1, num2);
+            textDisplay = add(firstNumber, secondNumber);
+            break;
         case "subtract":
-            return subtract(num1, num2);
+            textDisplay = subtract(firstNumber, secondNumber);
+            break;
         case "multiply":
-            return multiply(num1, num2);
+            textDisplay = multiply(firstNumber, secondNumber);
+            break;
         case "divide":
-            return divide(num1, num2);
+            textDisplay = divide(firstNumber, secondNumber);
+            break;
     }
+    console.log(textDisplay);
+    display.textContent = textDisplay;
+    operator = null;
+}
+
+function setOperator() {
+    console.log(this.id);
+    operator = this.id;
+    textDisplay = "";
 }
 
 function reset() {
@@ -43,6 +63,7 @@ function reset() {
     secondNumber = 0;
     textDisplay = "0";
     display.textContent = parseInt(textDisplay);
+    operator = null;
 }
 
 function inputToDisplay() {
@@ -50,6 +71,13 @@ function inputToDisplay() {
         return;
     }
     textDisplay += this.textContent;
-    display.textContent = parseInt(textDisplay);
+    let parsed = parseInt(textDisplay)
+    display.textContent = parsed;
     // console.log(parseInt(textDisplay));
+    if (!operator) {
+        firstNumber = parsed;
+    }
+    else {
+        secondNumber = parsed;
+    }
 }
