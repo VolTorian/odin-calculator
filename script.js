@@ -12,6 +12,7 @@ let firstNumber = 0;
 let secondNumber = 0;
 let operator = "add";
 let textDisplay = "0";
+let justFinished = false;
 
 
 function add(num1, num2) {
@@ -51,6 +52,7 @@ function operate() {
     }
     console.log(textDisplay);
     display.textContent = textDisplay;
+    justFinished = true;
     // operator = null;
 }
 
@@ -63,17 +65,22 @@ function setOperator() {
     // console.log(firstNumber);
     // secondNumber = textDisplay;
     textDisplay = "";
+    justFinished = false;
 }
 
 function reset() {
     firstNumber = 0;
     secondNumber = 0;
     textDisplay = "0";
+    operator = "add";
+    justFinished = false;
     display.textContent = parseInt(textDisplay);
-    // operator = null;
 }
 
 function inputToDisplay() {
+    if (justFinished) {
+        reset();
+    }
     if (textDisplay.length > 15) {
         return;
     }
