@@ -10,8 +10,9 @@ equalsButton.addEventListener("click", operate);
 
 let firstNumber = 0;
 let secondNumber = 0;
-let operator = null;
+let operator = "add";
 let textDisplay = "0";
+
 
 function add(num1, num2) {
     return (num1 + num2);
@@ -30,9 +31,10 @@ function divide(num1, num2) {
 }
 
 function operate() {
-    console.log(firstNumber);
-    console.log(operator);
-    console.log(secondNumber);
+    // console.log("first number: " + firstNumber);
+    // console.log(operator);
+    // console.log("second number: " + secondNumber);
+    console.log(firstNumber + " " + operator + " " + secondNumber);
     switch(operator) {
         case "add":
             textDisplay = add(firstNumber, secondNumber);
@@ -49,12 +51,17 @@ function operate() {
     }
     console.log(textDisplay);
     display.textContent = textDisplay;
-    operator = null;
+    // operator = null;
 }
 
 function setOperator() {
-    console.log(this.id);
+    operate();
+    // console.log("clicked: " + this.id);
     operator = this.id;
+    // firstNumber = secondNumber;
+    firstNumber = textDisplay;
+    // console.log(firstNumber);
+    // secondNumber = textDisplay;
     textDisplay = "";
 }
 
@@ -63,7 +70,7 @@ function reset() {
     secondNumber = 0;
     textDisplay = "0";
     display.textContent = parseInt(textDisplay);
-    operator = null;
+    // operator = null;
 }
 
 function inputToDisplay() {
@@ -73,11 +80,12 @@ function inputToDisplay() {
     textDisplay += this.textContent;
     let parsed = parseInt(textDisplay)
     display.textContent = parsed;
+    secondNumber = parsed;
     // console.log(parseInt(textDisplay));
-    if (!operator) {
-        firstNumber = parsed;
-    }
-    else {
-        secondNumber = parsed;
-    }
+    // if (!operator) {
+    //     firstNumber = parsed;
+    // }
+    // else {
+    //     secondNumber = parsed;
+    // }
 }
