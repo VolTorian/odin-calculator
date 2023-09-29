@@ -34,10 +34,6 @@ function divide(num1, num2) {
 }
 
 function operate() {
-    // console.log("first number: " + firstNumber);
-    // console.log(operator);
-    // console.log("second number: " + secondNumber);
-    console.log(firstNumber + " " + operator + " " + secondNumber);
     switch(operator) {
         case "add":
             textDisplay = add(firstNumber, secondNumber);
@@ -52,20 +48,14 @@ function operate() {
             textDisplay = divide(firstNumber, secondNumber);
             break;
     }
-    console.log("op: " + textDisplay);
     display.textContent = parseFloat(textDisplay);
     justFinished = true;
-    // operator = null;
 }
 
 function setOperator() {
     operate();
-    // console.log("clicked: " + this.id);
     operator = this.id;
-    // firstNumber = secondNumber;
     firstNumber = textDisplay;
-    // console.log(firstNumber);
-    // secondNumber = textDisplay;
     textDisplay = "0";
     justFinished = false;
 }
@@ -89,27 +79,16 @@ function inputToDisplay() {
     textDisplay += this.textContent;
     if (!textDisplay.includes(".")) {
         display.textContent = parseInt(textDisplay);
-        // let parsed = parseInt(textDisplay)
         secondNumber = display.textContent;
-        // console.log("test " + display.textContent);
     }
     else {
         display.textContent = textDisplay;
         secondNumber = textDisplay;
     }
-    console.log("test " + textDisplay + " end test");
-    // console.log(parseInt(textDisplay));
-    // if (!operator) {
-    //     firstNumber = parsed;
-    // }
-    // else {
-    //     secondNumber = parsed;
-    // }
 }
 
 function inputDecimal() {
     if (textDisplay.includes(".")) {
-        console.log("already has decimal");
         return;
     }
     textDisplay = parseInt(textDisplay);
