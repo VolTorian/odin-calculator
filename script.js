@@ -1,6 +1,8 @@
 const display = document.getElementById("display");
 const numberButtons = document.querySelectorAll(".number");
 numberButtons.forEach((button) => button.addEventListener("click", inputToDisplay));
+const decimalButton = document.getElementById("decimal");
+decimalButton.addEventListener("click", inputDecimal);
 const operatorButtons = document.querySelectorAll(".operator");
 operatorButtons.forEach((button) => button.addEventListener("click", setOperator));
 const clearButton = document.getElementById("clear");
@@ -16,7 +18,7 @@ let justFinished = false;
 
 
 function add(num1, num2) {
-    return (num1 + num2);
+    return parseFloat(num1) + parseFloat(num2);
 }
 
 function subtract(num1, num2) {
@@ -50,8 +52,8 @@ function operate() {
             textDisplay = divide(firstNumber, secondNumber);
             break;
     }
-    console.log(textDisplay);
-    display.textContent = textDisplay;
+    console.log("op: " + textDisplay);
+    display.textContent = parseFloat(textDisplay);
     justFinished = true;
     // operator = null;
 }
@@ -85,9 +87,17 @@ function inputToDisplay() {
         return;
     }
     textDisplay += this.textContent;
-    let parsed = parseInt(textDisplay)
-    display.textContent = parsed;
-    secondNumber = parsed;
+    if (!textDisplay.includes(".")) {
+        display.textContent = parseInt(textDisplay);
+        // let parsed = parseInt(textDisplay)
+        secondNumber = display.textContent;
+        // console.log("test " + display.textContent);
+    }
+    else {
+        display.textContent = textDisplay;
+        secondNumber = textDisplay;
+    }
+    console.log("test " + textDisplay);
     // console.log(parseInt(textDisplay));
     // if (!operator) {
     //     firstNumber = parsed;
@@ -95,4 +105,14 @@ function inputToDisplay() {
     // else {
     //     secondNumber = parsed;
     // }
+}
+
+function inputDecimal() {
+    if (textDisplay.includes(".")) {
+        console.log("already has decimal");
+        return;
+    }
+    textDisplay = parseInt(textDisplay);
+    textDisplay += ".";
+    display.textContent += ".";
 }
