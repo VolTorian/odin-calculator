@@ -66,7 +66,7 @@ function setOperator() {
     firstNumber = textDisplay;
     // console.log(firstNumber);
     // secondNumber = textDisplay;
-    textDisplay = "";
+    textDisplay = "0";
     justFinished = false;
 }
 
@@ -97,7 +97,7 @@ function inputToDisplay() {
         display.textContent = textDisplay;
         secondNumber = textDisplay;
     }
-    console.log("test " + textDisplay);
+    console.log("test " + textDisplay + " end test");
     // console.log(parseInt(textDisplay));
     // if (!operator) {
     //     firstNumber = parsed;
@@ -114,5 +114,5 @@ function inputDecimal() {
     }
     textDisplay = parseInt(textDisplay);
     textDisplay += ".";
-    display.textContent += ".";
+    display.textContent = textDisplay;
 }
